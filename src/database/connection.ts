@@ -6,11 +6,11 @@ const password = process.env.DB_PASSWORD;
 const connectString = process.env.DB_CONNECT_STRING;
 
 if (!user || !password || !connectString){
-    throw new Error ('Variaveis de conexão com  banco em erro.');
+    throw new Error ('Variaveis de conexão com banco em erro.');
 };
 
 
-export const pollPromise = oracledb.createPool({
+export const poolPromise = oracledb.createPool({
     user,
     password,
     connectString,
@@ -18,3 +18,4 @@ export const pollPromise = oracledb.createPool({
     poolMax: 5,
     poolIncrement: 1
 });
+

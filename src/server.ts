@@ -1,10 +1,16 @@
 import { app } from "./app";
+import { poolPromise } from "./database/connection";
 
-app.listen({port: 3000}, (err, adress)=>{
-    if(err){
-        console.error(err);
+async function startServer(){
+
+    try{
+        await poolPromise;
+        const address = await app.listen({
+            port:3000
+        });
+        console.log(`Deu certo no endereço${address}`);
+    } catch (err){
+        app.log.error(err);
         process.exit(1);
-    };
-
-    console.log(`Deu certo no endereço: ${adress}`)
-});
+    }
+}
