@@ -1,5 +1,17 @@
-export async function findUserByEmailRepository(){
-    
+import { poolPromise } from "../database/connection";
+
+export async function findUserByEmailRepository(email: string){
+    const pool = await poolPromise;
+    const connection = await pool.getConnection();
+
+    try{
+        const result = await connection.execute(`SELECT * FROM USERS WHERE EMAIL = :email`, { email });
+
+        return result.rows
+        
+    } finally {
+        await connection.close();
+    }
 };
 
 
