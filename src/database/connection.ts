@@ -18,4 +18,3 @@ export const poolPromise = oracledb.createPool({
     poolMax: 5,
     poolIncrement: 1
 });
-
