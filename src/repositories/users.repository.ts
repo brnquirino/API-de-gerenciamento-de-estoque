@@ -15,7 +15,7 @@ export async function findUserByEmailRepository(email: string){
     try{
         const result = await connection.execute(`SELECT * FROM USERS WHERE EMAIL = :email`, { email });
 
-        return result.rows
+        return result.rows ?? [];
         
     } finally {
         await connection.close();
@@ -37,9 +37,15 @@ export async function createUserRepository(user: createUser){
             RETURNING ID INTO :id`,
             { name: user.name, email: user.email, password: user.password, roleId: 3, id: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER} });
             
+        const id = result.outBinds?.id[0];
+            
+        if(id === undefined){
+            throw new Error ("Não foi possivel obter o ID do usuário criado.");
+        };
+
             await connection.commit();
 
-            return result.outBinds?.id[0];
+            return id;
 
     } finally {
         await connection.close();

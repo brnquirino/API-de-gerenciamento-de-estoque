@@ -3,13 +3,13 @@ import {findUserByEmailRepository, createUserRepository} from "../repositories/u
 
 
 
-export async function createUserService(name:string, email:string, password:string): Promise <User> {
+export async function createUserService(name:string, email:string, password:string): Promise <number> {
     
     const userExists = await findUserByEmailRepository(email);
 
-    if(userExists){
+    if(userExists.length > 0){
         throw new Error ("Usuário já cadastrado");
-    }
+    };
 
     const user = await createUserRepository({
         name,
