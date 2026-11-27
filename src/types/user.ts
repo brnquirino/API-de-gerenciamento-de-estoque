@@ -11,6 +11,13 @@ export type createUser = {
     password: string
 }
 
+export type createUserResponse = {
+    id: number,
+    name: string,
+    email: string,
+}
+
+
 export type updateUser = {
     name?: string,
     email?:string,

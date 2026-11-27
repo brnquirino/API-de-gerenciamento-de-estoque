@@ -8,9 +8,11 @@ async function startServer(){
         const address = await app.listen({
             port:3000
         });
-        console.log(`Deu certo no endereço${address}`);
+        console.log(`Deu certo no endereço ${address}`);
     } catch (err){
         app.log.error(err);
         process.exit(1);
     }
 }
+
+startServer();

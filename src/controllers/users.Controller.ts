@@ -11,7 +11,7 @@ export async function createUser(request: FastifyRequest, reply: FastifyReply){
 
     return reply.status(201).send({
         mensagem: "Usuário cadastrado",
-        dadosRecebidos: user
+        dados: user
     });
 };
 
@@ -30,7 +30,7 @@ export function alterInfoUser(request: FastifyRequest, reply: FastifyReply){
 
     const {name, email, senha} = request.body as {name: string, email: string, senha: string};
 
-    return reply.status(200).send(`Informações de usuário alteradas para: ${name}, ${email}, ${senha}`);
+    return reply.status(200).send(`Informações de usuário alteradas para com sucesso`);
 };
 
 export function deleteUser(request: FastifyRequest, reply: FastifyReply){
